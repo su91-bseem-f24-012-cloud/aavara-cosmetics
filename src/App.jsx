@@ -334,7 +334,6 @@ function ProductCard({ p }) {
 /* ---------------------------------------------------------------------- */
 /*  NAV                                                                     */
 /* ---------------------------------------------------------------------- */
-function ProductArt({ tone = "skin", vessel = "jar", badge, size = "full", image }) {
   function Nav() {
   const { navigate, cart, wishlist, currentUser, view, products } = useApp();
   const [menuOpen, setMenuOpen] = useState(false);
@@ -1592,7 +1591,6 @@ function WhatsAppFloat() {
     </a>
   );
 }
-
 /* ---------------------------------------------------------------------- */
 /*  APP SHELL                                                               */
 /* ---------------------------------------------------------------------- */
