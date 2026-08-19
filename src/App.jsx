@@ -191,6 +191,7 @@ function Reveal({ children, className = "" }) {
     </div>
   );
 }
+function ProductArt({ tone = "skin", vessel = "jar", badge, size = "full", image }) {
   const t = GROUP_TONE[tone] || GROUP_TONE.skin;
   if (image) {
     return (
