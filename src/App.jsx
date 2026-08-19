@@ -412,32 +412,27 @@ function ProductCard({ p }) {
           <Search size={15} /> Search products, brands, ingredients…
         </button>
       </div>
-
       {/* Mobile hamburger menu */}
-      {menuOpen && (
-        <div className="fixed inset-0 z-50 flex">
-          <div className="w-[82%] max-w-xs h-full overflow-y-auto p-5" style={{ background: COLORS.ivory }}>
-            <div className="flex items-center justify-between mb-6">
-              <span style={{ fontFamily: "Fraunces, serif" }} className="text-xl">Aavara</span>
-              <button onClick={() => setMenuOpen(false)}><X size={22} /></button>
-            </div>
-            <div className="flex flex-col gap-1">
-              {NAV_LINKS.map((l, i) => (
-                <button
-                  key={i}
-                  onClick={() => { navigate(l.key, l.params); setMenuOpen(false); }}
-                  className="text-left py-3 border-b text-sm font-medium"
-                  style={{ borderColor: "rgba(46,42,36,0.07)", color: COLORS.ink }}
-                >
-                  {l.label}
-                </button>
-              ))}
-            </div>
-          </div>
-          <div className="flex-1 bg-black/40" onClick={() => setMenuOpen(false)} />
-        </div>
-      )}
-
+{menuOpen && (
+  <div className="fixed inset-0 z-[9999] overflow-y-auto" style={{ background: COLORS.ivory }}>
+    <div className="flex items-center justify-between p-5 border-b" style={{ borderColor: "rgba(46,42,36,0.08)" }}>
+      <span style={{ fontFamily: "Fraunces, serif" }} className="text-xl">Aavara</span>
+      <button onClick={() => setMenuOpen(false)}><X size={24} /></button>
+    </div>
+    <div className="flex flex-col gap-2 p-4">
+      {NAV_LINKS.map((l, i) => (
+        <button
+          key={i}
+          onClick={() => { navigate(l.key, l.params); setMenuOpen(false); }}
+          className="w-full text-center py-4 rounded-lg text-base font-semibold tracking-wide"
+          style={{ background: COLORS.ink, color: COLORS.ivory }}
+        >
+          {l.label}
+        </button>
+      ))}
+    </div>
+  </div>
+)}
       {/* Search overlay */}
       {searchOpen && (
         <div className="fixed inset-0 z-50 flex items-start justify-center pt-20 px-4" style={{ background: "rgba(46,42,36,0.4)" }} onClick={() => setSearchOpen(false)}>
