@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useRef, createContext, useContext } from "react";
+import React, { useState, useEffect, useMemo, useRef, createContext, useContext, createPortal } from "react";
 import {
   Search, Heart, ShoppingBag, User, Menu, X, Star, ChevronDown, ChevronRight,
   ChevronLeft, Plus, Minus, Check, Truck, ShieldCheck, RotateCcw, MessageCircle,
@@ -413,7 +413,7 @@ function ProductCard({ p }) {
         </button>
       </div>
       {/* Mobile hamburger menu */}
-{menuOpen && (
+{menuOpen && createPortal(
   <div className="fixed inset-0 z-[9999] overflow-y-auto" style={{ background: COLORS.ivory }}>
     <div className="flex items-center justify-between p-5 border-b" style={{ borderColor: "rgba(46,42,36,0.08)" }}>
       <span style={{ fontFamily: "Fraunces, serif" }} className="text-xl">Aavara</span>
@@ -431,7 +431,8 @@ function ProductCard({ p }) {
         </button>
       ))}
     </div>
-  </div>
+  </div>,
+  document.body
 )}
       {/* Search overlay */}
       {searchOpen && (
