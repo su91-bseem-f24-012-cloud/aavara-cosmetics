@@ -415,7 +415,7 @@ function ProductCard({ p }) {
 
       {/* Mobile hamburger menu */}
       {menuOpen && (
-        <div className="fixed inset-0 z-50 flex">
+        <div className="fixed inset-0 z-[9999] flex">
           <div className="w-[82%] max-w-xs h-full overflow-y-auto p-5" style={{ background: COLORS.ivory }}>
             <div className="flex items-center justify-between mb-6">
               <span style={{ fontFamily: "Fraunces, serif" }} className="text-xl">Aavara</span>
