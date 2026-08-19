@@ -1393,7 +1393,7 @@ function AboutPage() {
         <div className="flex flex-col gap-4 mt-6 text-sm" style={{ color: COLORS.inkSoft }}>
           <div className="flex items-start gap-3"><MapPin size={16} className="mt-0.5" color={COLORS.gold} /> 12-B Gulberg III, Lahore, Pakistan</div>
           <div className="flex items-center gap-3"><Phone size={16} color={COLORS.gold} /> 0300 1234567</div>
-          <div className="flex items-center gap-3"><MessageCircle size={16} color={COLORS.gold} /> WhatsApp: 0300 1234567</div>
+          <div className="flex items-center gap-3"><MessageCircle size={16} color={COLORS.gold} /> WhatsApp: 03015944965</div>
           <div className="flex items-center gap-3"><Mail size={16} color={COLORS.gold} /> hello@aavara.pk</div>
           <div className="flex items-center gap-3"><Clock size={16} color={COLORS.gold} /> Mon–Sat, 10:00 AM – 8:00 PM</div>
         </div>
@@ -1579,7 +1579,7 @@ function WhatsAppFloat() {
   const num = (whatsappNumber || "").replace(/\D/g, "");
   const href = `https://wa.me/${num}?text=${encodeURIComponent("Hello, I would like to know more about a product.")}`;
   return (
-    
+     <a
       href={href}
       target="_blank"
       rel="noopener noreferrer"
@@ -1604,7 +1604,7 @@ export default function CosmeticStore() {
   const [currentUser, setCurrentUser] = useState(null);
   const [orders, setOrders] = useState([]);
   const [lastOrder, setLastOrder] = useState(null);
-  const [whatsappNumber, setWhatsappNumber] = useState("+92 3015944965");
+  const [whatsappNumber, setWhatsappNumber] = useState("+923015944965");
 
   const navigate = (name, params = {}) => {
     setView({ name, params });
