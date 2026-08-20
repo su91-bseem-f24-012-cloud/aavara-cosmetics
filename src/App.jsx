@@ -22,15 +22,22 @@ const COLORS = {
   ink: "#2E2A24",
   inkSoft: "#6B6255",
 };
-
 const GROUP_TONE = {
-  men: { bg: "linear-gradient(160deg,#EAE0CE,#DDD0B4)", accent: COLORS.gold },
-  women: { bg: "linear-gradient(160deg,#F1DCD8,#E9C9C2)", accent: COLORS.pinkDeep },
-  baby: { bg: "linear-gradient(160deg,#E4EEDD,#D3E3C9)", accent: COLORS.greenDeep },
-  hair: { bg: "linear-gradient(160deg,#EFE6D2,#E3D5B4)", accent: COLORS.gold },
-  skin: { bg: "linear-gradient(160deg,#F3ECE1,#E9DCC8)", accent: COLORS.goldLight },
+  men: { photo: "images/men-category.jpg", accent: COLORS.gold },
+  women: { photo: "images/women-category.jpg", accent: COLORS.pinkDeep },
+  baby: { photo: "images/baby-category.jpg", accent: COLORS.greenDeep },
+  hair: { photo: "images/hair-category.jpg", accent: COLORS.gold },
+  skin: { photo: "images/skin-category.jpg", accent: COLORS.goldLight },
 };
 
+function toneBgStyle(toneKey, overlayOpacity = 0.5) {
+  const t = GROUP_TONE[toneKey] || GROUP_TONE.skin;
+  return {
+    backgroundImage: `linear-gradient(rgba(251,247,241,${overlayOpacity}), rgba(251,247,241,${overlayOpacity})), url(${t.photo})`,
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+  };
+}
 function useFonts() {
   useEffect(() => {
     if (document.getElementById("cs-fonts")) return;
@@ -212,10 +219,10 @@ function ProductArt({ tone = "skin", vessel = "jar", badge, size = "full", image
       </div>
     );
   }
-  return (
+   return (
     <div
       className="relative w-full aspect-square rounded-xl overflow-hidden flex items-center justify-center"
-      style={{ background: t.bg }}
+      style={toneBgStyle(tone, 0.6)}
     >
       <svg width="46%" height="60%" viewBox="0 0 100 140" fill="none" className="animate-floatY">
         {vessel === "jar" && (
@@ -499,14 +506,19 @@ function CountDot({ n }) {
 function Hero() {
   const { navigate } = useApp();
   const [i, setI] = useState(0);
-  const scenes = [GROUP_TONE.women, GROUP_TONE.skin, GROUP_TONE.baby];
+  const banners = ["images/banner-1.jpg", "images/banner-2.jpg", "images/banner-3.jpg"];
   useEffect(() => {
-    const t = setInterval(() => setI((v) => (v + 1) % scenes.length), 4000);
+    const t = setInterval(() => setI((v) => (v + 1) % banners.length), 4000);
     return () => clearInterval(t);
   }, []);
   return (
-    <section className="relative overflow-hidden" style={{ background: scenes[i].bg, transition: "background 1.2s ease" }}>
-      <div className="max-w-7xl mx-auto px-4 md:px-8 py-16 md:py-24 grid md:grid-cols-2 items-center gap-10">
+    <section className="relative overflow-hidden">
+      <div
+        className="absolute inset-0 bg-cover bg-center transition-opacity duration-1000"
+        style={{ backgroundImage: `url(${banners[i]})` }}
+      />
+      <div className="absolute inset-0" style={{ background: "rgba(251,247,241,0.55)" }} />
+      <div className="relative max-w-7xl mx-auto px-4 md:px-8 py-16 md:py-24 grid md:grid-cols-2 items-center gap-10">
         <div className="animate-fadeInUp">
           <span className="inline-flex items-center gap-1.5 text-[11px] tracking-[0.15em] uppercase font-semibold mb-4" style={{ color: COLORS.gold }}>
             <Leaf size={13} /> Family Wellness &amp; Beauty
@@ -553,7 +565,7 @@ function CategoryCards() {
       <SectionHeading eyebrow="Shop by Category" title="Care, curated for everyone" />
       <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-4 mt-8">
         {CATEGORY_DEFS.map((c) => (
-          <div key={c.key} className="rounded-2xl p-4 flex flex-col gap-3" style={{ background: GROUP_TONE[c.key].bg }}>
+                    <div key={c.key} className="rounded-2xl p-4 flex flex-col gap-3" style={toneBgStyle(c.key, 0.35)}>
             <ProductArt tone={c.key} vessel={c.vessel} />
             <div>
               <h3 style={{ fontFamily: "Fraunces, serif" }} className="text-lg" >{c.label}</h3>
@@ -599,7 +611,7 @@ function BestSellersStrip() {
 function BabyBanner() {
   const { navigate } = useApp();
   return (
-    <section className="py-14" style={{ background: GROUP_TONE.baby.bg }}>
+        <section className="py-14" style={toneBgStyle("baby", 0.35)}>
       <div className="max-w-7xl mx-auto px-4 md:px-8 grid md:grid-cols-2 items-center gap-8">
         <div className="flex justify-center order-2 md:order-1">
           <div className="grid grid-cols-3 gap-3 w-64">
