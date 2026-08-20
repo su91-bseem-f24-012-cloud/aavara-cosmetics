@@ -65,8 +65,7 @@ const BRANDS = ["Velin", "Órla Botanicals", "Cambric", "Nourella", "Petal & Oat
 // gradually. See public/images/README.md for details.
 const RAW_PRODUCTS = [
   // MEN
-  { name: "Charcoal Deep-Clean Face Wash", brand: "Velin", groups: ["men", "skin"], sub: "Face Wash", vessel: "tube", tone: "men", size: "100ml", price: 950, sale: 760, rating: 4.5, reviews: 128, skinType: "Oily", ingredient: "Activated Charcoal", isBestSeller: true },
-  { name: "Oil-Control Mattifying Moisturiser", brand: "Velin", groups: ["men", "skin"], sub: "Moisturizer", vessel: "jar", tone: "men", size: "50g", price: 1150, rating: 4.3, reviews: 76, skinType: "Oily", ingredient: "Niacinamide" },
+{ name: "Charcoal Deep-Clean Face Wash", image: "/images/charcoal-face-wash.jpg", brand: "Velin", groups: ["men", "skin"], sub: "Face Wash", vessel: "tube", tone: "men", size: "100ml", price: 950, sale: 760, rating: 4.5, reviews: 128, skinType: "Oily", ingredient: "Activated Charcoal", isBestSeller: true },  { name: "Oil-Control Mattifying Moisturiser", brand: "Velin", groups: ["men", "skin"], sub: "Moisturizer", vessel: "jar", tone: "men", size: "50g", price: 1150, rating: 4.3, reviews: 76, skinType: "Oily", ingredient: "Niacinamide" },
   { name: "Clay Purifying Face Mask", brand: "Cambric", groups: ["men", "skin"], sub: "Face Mask", vessel: "jar", tone: "men", size: "75g", price: 1290, rating: 4.4, reviews: 54, skinType: "Combination", ingredient: "Kaolin Clay" },
   { name: "Coffee Energising Scrub", brand: "Cambric", groups: ["men", "skin"], sub: "Scrub", vessel: "tube", tone: "men", size: "100g", price: 890, sale: 710, rating: 4.2, reviews: 41, skinType: "Normal", ingredient: "Coffee Grounds", isNew: true },
   { name: "Daily Defence Sunscreen SPF 50", brand: "Velin", groups: ["men", "skin"], sub: "Sunscreen", vessel: "tube", tone: "men", size: "60ml", price: 1450, rating: 4.6, reviews: 203, skinType: "All", ingredient: "Zinc Oxide", isBestSeller: true },
