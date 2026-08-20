@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useRef, createContext, useContext, createPortal } from "react";
+import React, { useState, useEffect, useMemo, useRef, createContext, useContext } from "react";
 import {
   Search, Heart, ShoppingBag, User, Menu, X, Star, ChevronDown, ChevronRight,
   ChevronLeft, Plus, Minus, Check, Truck, ShieldCheck, RotateCcw, MessageCircle,
@@ -334,7 +334,7 @@ function ProductCard({ p }) {
 /* ---------------------------------------------------------------------- */
 /*  NAV                                                                     */
 /* ---------------------------------------------------------------------- */
-  function Nav() {
+function Nav() {
   const { navigate, cart, wishlist, currentUser, view, products } = useApp();
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
@@ -359,8 +359,8 @@ function ProductCard({ p }) {
     setSearchOpen(false);
     setMenuOpen(false);
   };
-
   return (
+    <>
     <header className="sticky top-0 z-40 backdrop-blur-md" style={{ background: "rgba(251,247,241,0.92)", borderBottom: "1px solid rgba(46,42,36,0.08)" }}>
       <div className="max-w-7xl mx-auto px-4 md:px-8">
         <div className="flex items-center justify-between h-16">
@@ -405,35 +405,39 @@ function ProductCard({ p }) {
           </div>
         </div>
       </div>
-
       {/* mobile search bar always visible under header on small screens */}
       <div className="sm:hidden px-4 pb-3">
         <button onClick={() => setSearchOpen(true)} className="w-full flex items-center gap-2 rounded-full px-4 py-2 text-sm" style={{ background: COLORS.paper, color: COLORS.inkSoft }}>
           <Search size={15} /> Search products, brands, ingredients…
         </button>
       </div>
+    </header>
+
       {/* Mobile hamburger menu */}
-{menuOpen && createPortal(
-  <div className="fixed inset-0 z-[9999] overflow-y-auto" style={{ background: COLORS.ivory }}>
-    <div className="flex items-center justify-between p-5 border-b" style={{ borderColor: "rgba(46,42,36,0.08)" }}>
-      <span style={{ fontFamily: "Fraunces, serif" }} className="text-xl">Aavara</span>
-      <button onClick={() => setMenuOpen(false)}><X size={24} /></button>
-    </div>
-    <div className="flex flex-col gap-2 p-4">
-      {NAV_LINKS.map((l, i) => (
-        <button
-          key={i}
-          onClick={() => { navigate(l.key, l.params); setMenuOpen(false); }}
-          className="w-full text-center py-4 rounded-lg text-base font-semibold tracking-wide"
-          style={{ background: COLORS.ink, color: COLORS.ivory }}
-        >
-          {l.label}
-        </button>
-      ))}
-    </div>
-  </div>,
-  document.body
-)}
+      {menuOpen && (
+        <div className="fixed inset-0 z-50 flex">
+          <div className="w-[82%] max-w-xs h-full overflow-y-auto p-5" style={{ background: COLORS.ivory }}>
+            <div className="flex items-center justify-between mb-6">
+              <span style={{ fontFamily: "Fraunces, serif" }} className="text-xl">Aavara</span>
+              <button onClick={() => setMenuOpen(false)}><X size={22} /></button>
+            </div>
+            <div className="flex flex-col gap-1">
+              {NAV_LINKS.map((l, i) => (
+                <button
+                  key={i}
+                  onClick={() => { navigate(l.key, l.params); setMenuOpen(false); }}
+                  className="text-left py-3 border-b text-sm font-medium"
+                  style={{ borderColor: "rgba(46,42,36,0.07)", color: COLORS.ink }}
+                >
+                  {l.label}
+                </button>
+              ))}
+            </div>
+          </div>
+          <div className="flex-1 bg-black/30" onClick={() => setMenuOpen(false)} />
+        </div>
+      )}
+
       {/* Search overlay */}
       {searchOpen && (
         <div className="fixed inset-0 z-50 flex items-start justify-center pt-20 px-4" style={{ background: "rgba(46,42,36,0.4)" }} onClick={() => setSearchOpen(false)}>
@@ -475,7 +479,7 @@ function ProductCard({ p }) {
           </div>
         </div>
       )}
-    </header>
+    </>
   );
 }
 
@@ -644,7 +648,7 @@ function TrustSection() {
     </section>
   );
 }
-  function Footer() {
+function Footer() {
   const { navigate } = useApp();
   return (
     <footer className="border-t" style={{ borderColor: "rgba(46,42,36,0.08)", background: COLORS.paper }}>
@@ -875,7 +879,7 @@ function AccordionItem({ title, children, defaultOpen }) {
     </div>
   );
 }
-  function ProductDetail({ params }) {
+function ProductDetail({ params }) {
   const { products, addToCart, wishlist, toggleWishlist, navigate } = useApp();
   const p = products.find((x) => x.id === params.id);
   const [qty, setQty] = useState(1);
@@ -1226,7 +1230,7 @@ function ConfirmationPage() {
     </div>
   );
 }
-  function TrackingPage({ params }) {
+function TrackingPage({ params }) {
   const { orders } = useApp();
   const order = orders.find((o) => o.id === params?.id) || orders[orders.length - 1];
   const steps = ["Order Placed", "Order Confirmed", "Processing", "Shipped", "Out for Delivery", "Delivered"];
@@ -1379,7 +1383,7 @@ function AboutPage() {
     </div>
   );
 }
-  function ContactPage() {
+function ContactPage() {
   const [sent, setSent] = useState(false);
   const [form, setForm] = useState({ name: "", phone: "", email: "", message: "" });
   return (
@@ -1388,8 +1392,8 @@ function AboutPage() {
         <SectionHeading eyebrow="We'd love to hear from you" title="Contact Us" />
         <div className="flex flex-col gap-4 mt-6 text-sm" style={{ color: COLORS.inkSoft }}>
           <div className="flex items-start gap-3"><MapPin size={16} className="mt-0.5" color={COLORS.gold} /> 12-B Gulberg III, Lahore, Pakistan</div>
-          <div className="flex items-center gap-3"><Phone size={16} color={COLORS.gold} /> 0300 1234567</div>
-          <div className="flex items-center gap-3"><MessageCircle size={16} color={COLORS.gold} /> WhatsApp: 03015944965</div>
+          <div className="flex items-center gap-3"><Phone size={16} color={COLORS.gold} /> 0301 5944965</div>
+          <div className="flex items-center gap-3"><MessageCircle size={16} color={COLORS.gold} /> WhatsApp: 0301 5944965</div>
           <div className="flex items-center gap-3"><Mail size={16} color={COLORS.gold} /> hello@aavara.pk</div>
           <div className="flex items-center gap-3"><Clock size={16} color={COLORS.gold} /> Mon–Sat, 10:00 AM – 8:00 PM</div>
         </div>
@@ -1520,7 +1524,7 @@ function AdminPage() {
     </div>
   );
 }
-  function ProductEditModal({ product, onClose, onSave }) {
+function ProductEditModal({ product, onClose, onSave }) {
   const [p, setP] = useState(product);
   const set = (k, v) => setP({ ...p, [k]: v });
   return (
@@ -1575,7 +1579,7 @@ function WhatsAppFloat() {
   const num = (whatsappNumber || "").replace(/\D/g, "");
   const href = `https://wa.me/${num}?text=${encodeURIComponent("Hello, I would like to know more about a product.")}`;
   return (
-     <a
+    <a
       href={href}
       target="_blank"
       rel="noopener noreferrer"
