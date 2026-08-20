@@ -535,13 +535,6 @@ function Hero() {
             <HeroBtn onClick={() => navigate("shop", { group: "baby" })} label="Shop Baby Care" ghost />
           </div>
         </div>
-        <div className="hidden md:flex justify-center">
-          <div className="grid grid-cols-2 gap-4 w-72">
-            <div className="col-span-2"><ProductArt tone={i === 0 ? "women" : i === 1 ? "skin" : "baby"} vessel="jar" /></div>
-            <ProductArt tone="men" vessel="bottle" />
-            <ProductArt tone="hair" vessel="bottle" />
-          </div>
-        </div>
       </div>
     </section>
   );
@@ -566,7 +559,6 @@ function CategoryCards() {
       <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-4 mt-8">
         {CATEGORY_DEFS.map((c) => (
                     <div key={c.key} className="rounded-2xl p-4 flex flex-col gap-3" style={toneBgStyle(c.key, 0.35)}>
-            <ProductArt tone={c.key} vessel={c.vessel} />
             <div>
               <h3 style={{ fontFamily: "Fraunces, serif" }} className="text-lg" >{c.label}</h3>
               <p className="text-xs mt-1" style={{ color: COLORS.inkSoft }}>{c.desc}</p>
